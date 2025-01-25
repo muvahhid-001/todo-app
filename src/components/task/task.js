@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./task.css";
 
 const Task = ({ text, status, creationTime }) => {
-  const [editText, setEditText] = useState(text);
-
-  const handleChange = (e) => {
-    setEditText(e.target.value);
-  };
-
   return (
     <li className={status ? status : null}>
       <div className="view">
@@ -20,14 +14,8 @@ const Task = ({ text, status, creationTime }) => {
         <button className="icon icon-edit"></button>
         <button className="icon icon-destroy"></button>
       </div>
-
       {status === "editing" && (
-        <input
-          type="text"
-          className="edit"
-          value={editText}
-          onChange={handleChange}
-        />
+        <input type="text" className="edit" defaultValue="Editing task" />
       )}
     </li>
   );
