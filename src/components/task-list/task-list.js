@@ -4,7 +4,7 @@ import Task from "../task/task";
 
 import "./task-list.css";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, deleteTask }) => {
   return (
     <ul className="todo-list">
       {tasks.map((task) => (
@@ -14,6 +14,9 @@ const TaskList = ({ tasks }) => {
           text={task.text}
           status={task.status}
           creationTime={task.creationTime}
+          deleteTask={() => {
+            deleteTask(task.id);
+          }}
         />
       ))}
     </ul>

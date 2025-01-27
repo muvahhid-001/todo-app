@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 import NewTaskForm from "../new-task-form";
 import Footer from "../footer";
@@ -6,40 +6,46 @@ import TaskList from "../task-list/task-list";
 
 import "./app.css";
 
-const App = () => {
-  const data = [
-    {
-      id: 1,
-      text: "Completed task",
-      status: "completed",
-      creationTime: "created 17 seconds ago",
-    },
-    {
-      id: 2,
-      text: "Editing task",
-      status: "editing",
-      creationTime: "created 5 minutes ago",
-    },
-    {
-      id: 3,
-      text: "Active task",
-      status: "",
-      creationTime: "created 5 minutes ago",
-    },
-  ];
+export default class App extends Component {
+  state = {
+    data: [
+      {
+        id: 1,
+        text: "Атжумания",
+        status: "active",
+        important: false,
+        creationTime: "created 17 seconds ago",
+      },
+      {
+        id: 2,
+        text: "Предсидания",
+        status: "active",
+        important: false,
+        creationTime: "created 45 seconds ago",
+      },
+    ],
+  };
 
-  return (
-    <section className="todoapp">
-      <header className="header">
-        <h1>Todos</h1>
-        <NewTaskForm />
-      </header>
-      <section className="main">
-        <TaskList tasks={data} />
+  deleteLi = (id) => {
+    this.setState(({ data }) => {
+      const idx = data.findIndex((el) => el.id === id);
+      const newArray = [...data.slice(0, idx), ...data.slice(idx + 1)];
+      return { data: newArray };
+    });
+  };
+
+  render() {
+    return (
+      <section className="todoapp">
+        <header className="header">
+          <h1>Todos</h1>
+          <NewTaskForm />
+        </header>
+        <section className="main">
+          <TaskList tasks={this.state.data} deleteTask={this.deleteLi} />
+        </section>
+        <Footer />
       </section>
-      <Footer />
-    </section>
-  );
-};
-
-export default App;
+    );
+  }
+}

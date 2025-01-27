@@ -1,24 +1,49 @@
-import React from "react";
+import React, { Component } from "react";
 
 import "./task.css";
 
-const Task = ({ text, status, creationTime }) => {
-  return (
-    <li className={status ? status : null}>
-      <div className="view">
-        <input className="toggle" type="checkbox" />
-        <label>
-          <span className="description">{text}</span>
-          <span className="created">{creationTime}</span>
-        </label>
-        <button className="icon icon-edit"></button>
-        <button className="icon icon-destroy"></button>
-      </div>
-      {status === "editing" && (
-        <input type="text" className="edit" defaultValue="Editing task" />
-      )}
-    </li>
-  );
-};
+export default class Task extends Component {
+  state = {
+    done: false,
+  };
 
-export default Task;
+  liClick = () => {
+    this.setState((state) => {
+      return {
+        done: !state.done,
+      };
+    });
+  };
+
+  render() {
+    const { text, status, creationTime } = this.props;
+
+    let className = status;
+
+    if (this.state.done) {
+      className = "completed";
+    }
+
+    return (
+      <li className={className ? className : null}>
+        <div className="view">
+          <input className="toggle" type="checkbox" />
+          <label>
+            <span className="description" onClick={this.liClick}>
+              {text}
+            </span>
+            <span className="created">{creationTime}</span>
+          </label>
+          <button className="icon icon-edit"></button>
+          <button
+            className="icon icon-destroy"
+            onClick={this.props.deleteTask}
+          ></button>
+        </div>
+        {status === "editing" && (
+          <input type="text" className="edit" defaultValue="Editing task" />
+        )}
+      </li>
+    );
+  }
+}
