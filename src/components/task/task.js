@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./task.css";
 
 const Task = ({
@@ -37,6 +38,24 @@ const Task = ({
       )}
     </li>
   );
+};
+
+Task.defaultProps = {
+  text: "",
+  status: "",
+  creationTime: "",
+  onToggleDone: () => {},
+  deleteTask: () => {},
+  done: false,
+};
+
+Task.propTypes = {
+  text: PropTypes.string,
+  status: PropTypes.string,
+  creationTime: PropTypes.string,
+  onToggleDone: PropTypes.func,
+  deleteTask: PropTypes.func,
+  done: PropTypes.bool,
 };
 
 export default Task;

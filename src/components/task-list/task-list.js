@@ -1,5 +1,6 @@
 import React from "react";
-import Task from "../task/task"; // Импортируем компонент Task
+import PropTypes from "prop-types";
+import Task from "../task/task";
 import "./task-list.css";
 
 const TaskList = ({ tasks, deleteTask, onToggleDone }) => {
@@ -12,13 +13,33 @@ const TaskList = ({ tasks, deleteTask, onToggleDone }) => {
           text={task.text}
           status={task.status}
           creationTime={task.creationTime}
-          done={task.done} // Передаем флаг done в Task
-          deleteTask={() => deleteTask(task.id)} // передаем функцию для удаления
-          onToggleDone={() => onToggleDone(task.id)} // передаем функцию для переключения done
+          done={task.done}
+          deleteTask={() => deleteTask(task.id)}
+          onToggleDone={() => onToggleDone(task.id)}
         />
       ))}
     </ul>
   );
+};
+
+TaskList.defaultProps = {
+  tasks: [],
+  deleteTask: () => {},
+  onToggleDone: () => {},
+};
+
+TaskList.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+      text: PropTypes.string,
+      status: PropTypes.string,
+      creationTime: PropTypes.string,
+      done: PropTypes.bool,
+    })
+  ),
+  deleteTask: PropTypes.func,
+  onToggleDone: PropTypes.func,
 };
 
 export default TaskList;

@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import "./task-filter.css";
 
 const TaskFilter = ({ setFilter, activeFilter }) => {
@@ -31,6 +31,16 @@ const TaskFilter = ({ setFilter, activeFilter }) => {
       </li>
     </ul>
   );
+};
+
+TaskFilter.defaultProps = {
+  setFilter: () => {},
+  activeFilter: "all",
+};
+
+TaskFilter.propTypes = {
+  setFilter: PropTypes.func,
+  activeFilter: PropTypes.string,
 };
 
 export default TaskFilter;
