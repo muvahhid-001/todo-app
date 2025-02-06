@@ -7,8 +7,14 @@ import "./app.css";
 export default class App extends Component {
   state = {
     data: [
-      this.createTodoItem("Атжумания", 1),
-      this.createTodoItem("Предсидания", 2),
+      {
+        id: -1,
+        text: "Атжумания 100",
+        status: "active",
+        important: false,
+        done: false,
+        creationTime: new Date(2025, 1, 3),
+      },
     ],
     nextId: 3,
     filter: "all",
@@ -21,7 +27,7 @@ export default class App extends Component {
       status: "active",
       important: false,
       done: false,
-      creationTime: "Created 17 seconds ago",
+      creationTime: new Date(),
     };
   }
 

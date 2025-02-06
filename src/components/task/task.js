@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { formatDistanceToNow } from "date-fns";
+
 import "./task.css";
 
 const Task = ({
@@ -28,7 +30,9 @@ const Task = ({
           <span className="description" onClick={onToggleDone}>
             {text}
           </span>
-          <span className="created">{creationTime}</span>
+          <span className="created">
+            Created {formatDistanceToNow(creationTime, { addSuffix: true })}
+          </span>
         </label>
         <button className="icon icon-edit"></button>
         <button className="icon icon-destroy" onClick={deleteTask}></button>
