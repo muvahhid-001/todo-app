@@ -64,6 +64,7 @@
   margin: 0 0 0 43px;
 }
 
+
 .todo-list li.editing .view {
   display: none;
 }
@@ -140,6 +141,7 @@
 }
 
 .todo-list li .icon-destroy {
+  margin-top: 6px;
   right: 10px;
 }
 
