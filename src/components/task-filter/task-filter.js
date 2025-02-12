@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./task-filter.css";
 
-const TaskFilter = ({ setFilter, activeFilter }) => {
+const TaskFilter = ({ setFilter = () => {}, activeFilter = 'active' }) => {
   return (
     <ul className="filters">
       <li>
@@ -31,11 +31,6 @@ const TaskFilter = ({ setFilter, activeFilter }) => {
       </li>
     </ul>
   );
-};
-
-TaskFilter.defaultProps = {
-  setFilter: () => {},
-  activeFilter: "all",
 };
 
 TaskFilter.propTypes = {

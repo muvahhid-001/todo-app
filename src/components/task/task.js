@@ -5,12 +5,12 @@ import { formatDistanceToNow } from "date-fns";
 import "./task.css";
 
 const Task = ({
-  text,
-  status,
-  creationTime,
-  onToggleDone,
-  deleteTask,
-  done,
+  text = '',
+  status = '',
+  creationTime = '',
+  onToggleDone = () => {},
+  deleteTask = () => {},
+  done = false,
 }) => {
   let className = status;
   if (done) {
@@ -44,19 +44,10 @@ const Task = ({
   );
 };
 
-Task.defaultProps = {
-  text: "",
-  status: "",
-  creationTime: "",
-  onToggleDone: () => {},
-  deleteTask: () => {},
-  done: false,
-};
-
 Task.propTypes = {
   text: PropTypes.string,
   status: PropTypes.string,
-  creationTime: PropTypes.string,
+  creationTime: PropTypes.instanceOf(Date),
   onToggleDone: PropTypes.func,
   deleteTask: PropTypes.func,
   done: PropTypes.bool,
