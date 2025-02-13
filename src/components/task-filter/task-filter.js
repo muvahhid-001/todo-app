@@ -1,31 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./task-filter.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './task-filter.css';
 
 const TaskFilter = ({ setFilter = () => {}, activeFilter = 'active' }) => {
   return (
     <ul className="filters">
       <li>
-        <button
-          className={activeFilter === "all" ? "selected" : ""}
-          onClick={() => setFilter("all")}
-        >
+        <button className={activeFilter === 'all' ? 'selected' : ''} onClick={() => setFilter('all')}>
           All
         </button>
       </li>
       <li>
-        <button
-          className={activeFilter === "active" ? "selected" : ""}
-          onClick={() => setFilter("active")}
-        >
+        <button className={activeFilter === 'active' ? 'selected' : ''} onClick={() => setFilter('active')}>
           Active
         </button>
       </li>
       <li>
-        <button
-          className={activeFilter === "completed" ? "selected" : ""}
-          onClick={() => setFilter("completed")}
-        >
+        <button className={activeFilter === 'completed' ? 'selected' : ''} onClick={() => setFilter('completed')}>
           Completed
         </button>
       </li>

@@ -1,30 +1,30 @@
-import React, { Component } from "react";
-import NewTaskForm from "../new-task-form";
-import Footer from "../footer";
-import TaskList from "../task-list/task-list";
-import "./app.css";
+import React, { Component } from 'react';
+import NewTaskForm from '../new-task-form';
+import Footer from '../footer';
+import TaskList from '../task-list/task-list';
+import './app.css';
 
 export default class App extends Component {
   state = {
     data: [
       {
         id: -1,
-        text: "Атжумания 100",
-        status: "active",
+        text: 'Атжумания 100',
+        status: 'active',
         important: false,
         done: false,
         creationTime: new Date(2025, 1, 3),
       },
     ],
     nextId: 3,
-    filter: "all",
+    filter: 'all',
   };
 
   createTodoItem(text, id) {
     return {
       id,
       text,
-      status: "active",
+      status: 'active',
       important: false,
       done: false,
       creationTime: new Date(),
@@ -40,9 +40,7 @@ export default class App extends Component {
 
   onToggleDone = (id) => {
     this.setState(({ data }) => ({
-      data: data.map((task) =>
-        task.id === id ? { ...task, done: !task.done } : task
-      ),
+      data: data.map((task) => (task.id === id ? { ...task, done: !task.done } : task)),
     }));
   };
 
@@ -65,9 +63,9 @@ export default class App extends Component {
   getFilteredTasks() {
     const { data, filter } = this.state;
     switch (filter) {
-      case "active":
+      case 'active':
         return data.filter((task) => !task.done);
-      case "completed":
+      case 'completed':
         return data.filter((task) => task.done);
       default:
         return data;
@@ -86,11 +84,7 @@ export default class App extends Component {
           <NewTaskForm addTask={this.addTask} />
         </header>
         <section className="main">
-          <TaskList
-            tasks={this.getFilteredTasks()}
-            deleteTask={this.deleteLi}
-            onToggleDone={this.onToggleDone}
-          />
+          <TaskList tasks={this.getFilteredTasks()} deleteTask={this.deleteLi} onToggleDone={this.onToggleDone} />
         </section>
         <Footer
           setFilter={this.setFilter}

@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { formatDistanceToNow } from "date-fns";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { formatDistanceToNow } from 'date-fns';
 
-import "./task.css";
+import './task.css';
 
 const Task = ({
   text = '',
@@ -14,32 +14,23 @@ const Task = ({
 }) => {
   let className = status;
   if (done) {
-    className = "completed";
+    className = 'completed';
   }
 
   return (
     <li className={className ? className : null}>
       <div className="view">
-        <input
-          className="toggle"
-          type="checkbox"
-          checked={done}
-          onChange={onToggleDone}
-        />
+        <input className="toggle" type="checkbox" checked={done} onChange={onToggleDone} />
         <label>
           <span className="description" onClick={onToggleDone}>
             {text}
           </span>
-          <span className="created">
-            Created {formatDistanceToNow(creationTime, { addSuffix: true })}
-          </span>
+          <span className="created">Created {formatDistanceToNow(creationTime, { addSuffix: true })}</span>
         </label>
         <button className="icon icon-edit"></button>
         <button className="icon icon-destroy" onClick={deleteTask}></button>
       </div>
-      {status === "editing" && (
-        <input type="text" className="edit" defaultValue="Editing task" />
-      )}
+      {status === 'editing' && <input type="text" className="edit" defaultValue="Editing task" />}
     </li>
   );
 };

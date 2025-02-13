@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import "./new-task-form.css";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import './new-task-form.css';
 
 export default class NewTaskForm extends Component {
   static defaultProps = {
@@ -11,13 +11,13 @@ export default class NewTaskForm extends Component {
     addTask: PropTypes.func,
   };
 
-  state = { text: "" };
+  state = { text: '' };
 
   onSubmit = (e) => {
     e.preventDefault();
     if (this.state.text.trim()) {
       this.props.addTask(this.state.text);
-      this.setState({ text: "" });
+      this.setState({ text: '' });
     }
   };
 
