@@ -38,9 +38,21 @@ export default class App extends Component {
     }));
   };
 
+  updateTask = (id, newText) => {
+    this.setState(({ data }) => ({
+      data: data.map((task) => (task.id === id ? { ...task, text: newText, status: 'active' } : task)),
+    }));
+  };
+
   onToggleDone = (id) => {
     this.setState(({ data }) => ({
       data: data.map((task) => (task.id === id ? { ...task, done: !task.done } : task)),
+    }));
+  };
+
+  editLi = (id) => {
+    this.setState(({ data }) => ({
+      data: data.map((task) => (task.id === id ? { ...task, status: 'editing' } : task)),
     }));
   };
 
@@ -84,7 +96,13 @@ export default class App extends Component {
           <NewTaskForm addTask={this.addTask} />
         </header>
         <section className="main">
-          <TaskList tasks={this.getFilteredTasks()} deleteTask={this.deleteLi} onToggleDone={this.onToggleDone} />
+          <TaskList
+            tasks={this.getFilteredTasks()}
+            deleteTask={this.deleteLi}
+            editTask={this.editLi}
+            onToggleDone={this.onToggleDone}
+            updateTask={this.updateTask}
+          />
         </section>
         <Footer
           setFilter={this.setFilter}

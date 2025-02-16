@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import Task from '../task/task';
 import './task-list.css';
 
-const TaskList = ({ tasks = [], deleteTask = () => {}, onToggleDone = () => {} }) => {
+const TaskList = ({
+  tasks = [],
+  deleteTask = () => {},
+  onToggleDone = () => {},
+  editTask = () => {},
+  updateTask = () => {},
+}) => {
   return (
     <ul className="todo-list">
       {tasks.map((task) => (
@@ -16,6 +22,8 @@ const TaskList = ({ tasks = [], deleteTask = () => {}, onToggleDone = () => {} }
           done={task.done}
           deleteTask={() => deleteTask(task.id)}
           onToggleDone={() => onToggleDone(task.id)}
+          editTask={() => editTask(task.id)}
+          updateTask={(newText) => updateTask(task.id, newText)}
         />
       ))}
     </ul>
@@ -34,6 +42,7 @@ TaskList.propTypes = {
   ),
   deleteTask: PropTypes.func,
   onToggleDone: PropTypes.func,
+  edit: PropTypes.func,
 };
 
 export default TaskList;
