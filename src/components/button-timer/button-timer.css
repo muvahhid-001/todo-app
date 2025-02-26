@@ -1,0 +1,17 @@
+.play:after {
+  content: '▶';
+}
+.pause:after {
+  content: '⏸';
+}
+.button_tg:hover {
+  color: #af5b5e;
+}
+.button_tg {
+  color: #cc9a9a;
+  font-size: 20px;
+  width: 17px;
+}
+.pause {
+  font-size: 25px;
+}

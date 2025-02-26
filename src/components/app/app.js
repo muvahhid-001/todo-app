@@ -13,34 +13,51 @@ export default class App extends Component {
         status: 'active',
         important: false,
         done: false,
+        min: 0,
+        sec: 30,
         creationTime: new Date(2025, 1, 3),
+        buttonStatus: false,
       },
     ],
     nextId: 3,
     filter: 'all',
   };
 
-  createTodoItem(text, id) {
+  createTodoItem(text, id, min, sec) {
     return {
       id,
       text,
       status: 'active',
       important: false,
+      min,
+      sec,
       done: false,
+      buttonStatus: false,
       creationTime: new Date(),
     };
   }
 
-  addTask = (text) => {
+  addTask = (text, min, sec) => {
     this.setState(({ data, nextId }) => ({
-      data: [...data, this.createTodoItem(text, nextId)],
+      data: [...data, this.createTodoItem(text, nextId, min, sec)],
       nextId: nextId + 1,
     }));
   };
 
-  updateTask = (id, newText) => {
+  updateTask = (id, newText, min, sec, buttonStatus) => {
     this.setState(({ data }) => ({
-      data: data.map((task) => (task.id === id ? { ...task, text: newText, status: 'active' } : task)),
+      data: data.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              text: newText,
+              min,
+              sec,
+              buttonStatus,
+              status: task.status === 'editing' ? 'active' : task.status,
+            }
+          : task
+      ),
     }));
   };
 
@@ -89,6 +106,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { data, filter } = this.state;
     return (
       <section className="todoapp">
         <header className="header">
@@ -97,7 +115,8 @@ export default class App extends Component {
         </header>
         <section className="main">
           <TaskList
-            tasks={this.getFilteredTasks()}
+            tasks={data}
+            filter={filter}
             deleteTask={this.deleteLi}
             editTask={this.editLi}
             onToggleDone={this.onToggleDone}
@@ -106,7 +125,7 @@ export default class App extends Component {
         </section>
         <Footer
           setFilter={this.setFilter}
-          filter={this.state.filter}
+          filter={filter}
           activeTasksCount={this.getActiveTasksCount()}
           clearCompleted={this.clearCompleted}
         />

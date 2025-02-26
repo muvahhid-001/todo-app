@@ -11,13 +11,17 @@ export default class NewTaskForm extends Component {
     addTask: PropTypes.func,
   };
 
-  state = { text: '' };
+  state = {
+    text: '',
+    min: '',
+    sec: '',
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
     if (this.state.text.trim()) {
-      this.props.addTask(this.state.text);
-      this.setState({ text: '' });
+      this.props.addTask(this.state.text, Number(this.state.min), Number(this.state.sec));
+      this.setState({ text: '', min: '', sec: '' });
     }
   };
 
@@ -25,16 +29,21 @@ export default class NewTaskForm extends Component {
     this.setState({ text: e.target.value });
   };
 
+  onChangeMin = (e) => {
+    this.setState({ min: e.target.value });
+  };
+
+  onChangeSec = (e) => {
+    this.setState({ sec: e.target.value });
+  };
+
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          className="new-todo"
-          placeholder="What needs to be done?"
-          autoFocus
-          value={this.state.text}
-          onChange={this.onChange}
-        />
+        <input className="new-todo" placeholder="Task" autoFocus value={this.state.text} onChange={this.onChange} />
+        <input className="new-todo-form__timer" placeholder="Min" value={this.state.min} onChange={this.onChangeMin} />
+        <input className="new-todo-form__timer" placeholder="Sec" value={this.state.sec} onChange={this.onChangeSec} />
+        <button type="submit" style={{ display: 'none' }}></button>
       </form>
     );
   }

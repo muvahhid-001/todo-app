@@ -5,6 +5,7 @@ import './task-list.css';
 
 const TaskList = ({
   tasks = [],
+  filter = 'all',
   deleteTask = () => {},
   onToggleDone = () => {},
   editTask = () => {},
@@ -12,20 +13,30 @@ const TaskList = ({
 }) => {
   return (
     <ul className="todo-list">
-      {tasks.map((task) => (
-        <Task
-          key={task.id}
-          id={task.id}
-          text={task.text}
-          status={task.status}
-          creationTime={task.creationTime}
-          done={task.done}
-          deleteTask={() => deleteTask(task.id)}
-          onToggleDone={() => onToggleDone(task.id)}
-          editTask={() => editTask(task.id)}
-          updateTask={(newText) => updateTask(task.id, newText)}
-        />
-      ))}
+      {tasks.map((task) => {
+        // Определяем, должна ли задача отображаться
+        const isVisible =
+          filter === 'all' || (filter === 'active' && !task.done) || (filter === 'completed' && task.done);
+
+        return (
+          <Task
+            key={task.id}
+            id={task.id}
+            text={task.text}
+            status={task.status}
+            creationTime={task.creationTime}
+            done={task.done}
+            min={task.min}
+            sec={task.sec}
+            deleteTask={() => deleteTask(task.id)}
+            onToggleDone={() => onToggleDone(task.id)}
+            editTask={() => editTask(task.id)}
+            updateTask={(newText, min, sec, buttonStatus) => updateTask(task.id, newText, min, sec, buttonStatus)}
+            // Передаём стиль, скрывающий задачу, если она не соответствует фильтру
+            style={{ display: isVisible ? 'block' : 'none' }}
+          />
+        );
+      })}
     </ul>
   );
 };
@@ -40,9 +51,11 @@ TaskList.propTypes = {
       done: PropTypes.bool,
     })
   ),
+  filter: PropTypes.string,
   deleteTask: PropTypes.func,
   onToggleDone: PropTypes.func,
-  edit: PropTypes.func,
+  editTask: PropTypes.func,
+  updateTask: PropTypes.func,
 };
 
 export default TaskList;
