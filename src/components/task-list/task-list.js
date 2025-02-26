@@ -14,7 +14,6 @@ const TaskList = ({
   return (
     <ul className="todo-list">
       {tasks.map((task) => {
-        // Определяем, должна ли задача отображаться
         const isVisible =
           filter === 'all' || (filter === 'active' && !task.done) || (filter === 'completed' && task.done);
 
@@ -32,7 +31,6 @@ const TaskList = ({
             onToggleDone={() => onToggleDone(task.id)}
             editTask={() => editTask(task.id)}
             updateTask={(newText, min, sec, buttonStatus) => updateTask(task.id, newText, min, sec, buttonStatus)}
-            // Передаём стиль, скрывающий задачу, если она не соответствует фильтру
             style={{ display: isVisible ? 'block' : 'none' }}
           />
         );

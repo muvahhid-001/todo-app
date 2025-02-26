@@ -24,7 +24,6 @@ class Task extends Component {
       this.setState({ editingText: this.props.text });
     }
 
-    // Если задача стала выполненной, останавливаем таймер
     if (!prevProps.done && this.props.done) {
       this.stopTimer();
     }
@@ -81,9 +80,9 @@ class Task extends Component {
 
   handleEditSubmit = (e) => {
     if (e.key === 'Enter') {
-      const { id, updateTask, min, sec } = this.props;
-      const { editingText } = this.state;
-      updateTask(id, editingText, min, sec, false);
+      const { updateTask } = this.props;
+      const { editingText, minutes, seconds } = this.state;
+      updateTask(editingText, minutes, seconds, false);
     }
   };
 
@@ -110,7 +109,7 @@ class Task extends Component {
         <div className="view">
           <input className="toggle" type="checkbox" checked={done} onChange={onToggleDone} />
           <label>
-            <span className="description" onClick={onToggleDone}>
+            <span className="description title_task" onClick={onToggleDone}>
               {this.props.text}
             </span>
             <button

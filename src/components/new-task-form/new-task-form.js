@@ -41,8 +41,20 @@ export default class NewTaskForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <input className="new-todo" placeholder="Task" autoFocus value={this.state.text} onChange={this.onChange} />
-        <input className="new-todo-form__timer" placeholder="Min" value={this.state.min} onChange={this.onChangeMin} />
-        <input className="new-todo-form__timer" placeholder="Sec" value={this.state.sec} onChange={this.onChangeSec} />
+        <input
+          className="new-todo-form__timer"
+          placeholder="Min"
+          type="number"
+          value={this.state.min}
+          onChange={this.onChangeMin}
+        />
+        <input
+          className="new-todo-form__timer"
+          placeholder="Sec"
+          type="number"
+          value={this.state.sec}
+          onChange={this.onChangeSec}
+        />
         <button type="submit" style={{ display: 'none' }}></button>
       </form>
     );

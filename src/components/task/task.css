@@ -2,6 +2,7 @@
   background: #fff;
   margin: 130px 0 40px 0;
   position: relative;
+  width: 590px;
   box-shadow:
     0 2px 4px 0 rgba(0, 0, 0, 0.2),
     0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -188,6 +189,8 @@
 }
 .timer {
   font-size: 13px;
+  width: 40px;
+  margin-left: 10px;
   color: #bdbcbc;
 }
 .play:after {
@@ -206,4 +209,7 @@
 }
 .pause {
   font-size: 25px;
+}
+span.title_task {
+  width: 200px;
 }
